@@ -1,12 +1,19 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
-const PORT = process.env.PORT || 7100;
-
+// 
 // Connect to MongoDB (replace 'your-database-url' with your actual MongoDB connection string)
-// mongoose.connect('mongodb://your-database-url/portfolio')
-//     .then(() => console.log('Connected to MongoDB'))
-//     .catch(err => console.error('Error connecting to MongoDB', err));
+const port = process.env.port || 7100
+ const bodyparser = require("body-parser")
+ mongoose
+ .connect('mongodb://127.0.0.1:27017/portfolio',{family:4})
+ .then(() => {
+     console.log('Connected to Mongo at :' +port);
+ })
+ .catch((err) => {
+     console.error('Error connecting to Mongo', err);
+ });
+
 
 // Set up middleware
 app.use(express.static('public'));
@@ -35,6 +42,6 @@ app.get('/about', (req, res) => {
 });
 
 // Start the server
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
 });
